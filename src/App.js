@@ -1,24 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
+import './css/style.css'
+import './css/general.css'
+import './css/queries.css'
+import Header from './components/Header';
+import HomePage from './components/HomePage';
+import Collection from './components/Collection';
+import { Purpose } from './components/Purpose';
+import Comments from './components/Feedback/Comments';
+import { Donation } from './components/Donation';
+import { Footer } from './components/Footer';
+import { ContactUs } from './components/ContactUs';
+import { AboutUs } from './components/AboutUs';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+
+      <main>
+        <HomePage />
+        <AboutUs />
+        <Purpose />
+        <Collection />
+        <Comments
+          commentsUrl="http://localhost:3004/comments"
+          currentUserId="1"
+        />
+        <Donation />
+        {/* <ContactUs /> */}
+      </main >
+
+      <Footer />
+    </>
   );
 }
 
