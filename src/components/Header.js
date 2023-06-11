@@ -13,39 +13,41 @@ export default function Header() {
         return () => unsubscribe();
     }, []);
 
-    return (<header class="header">
+    return (<header className="header">
         <a href="#" className='logo'>
             {
-                <img class="logo" alt="Omnifood logo" src={logo_2} />
+                <img className="logo" alt="Omnifood logo" src={logo_2} />
             }
 
         </a>
 
-        <nav class="main-nav">
-            <ul class="main-nav-list">
-                <li><a class="main-nav-link" href="#how">About</a></li>
-                <li><a class="main-nav-link" href="#meals">Our Collection</a></li>
+        <nav className="main-nav">
+            <ul className="main-nav-list">
+                <li><a className="main-nav-link" href="#how">About</a></li>
+                <li><a className="main-nav-link" href="#meals">Our Collection</a></li>
                 <li>
-                    <a class="main-nav-link" href="#testimonials">Donation</a>
+                    <a className="main-nav-link" href="#testimonials">Donation</a>
                 </li>
-                <li><a class="main-nav-link" href="#pricing">Contact Us</a></li>
+                <li><a className="main-nav-link" href="#pricing">Contact Us</a></li>
                 <li>
-                    {user ? (
-                        <div>
-                            {user.displayName}
-                            <button onClick={() => auth.signOut()}>Sign out</button>
-                        </div>
-                    ) : (
-                        <button onClick={signInWithGoogle}>Signin</button>
-                    )}
-
+                    <div className='main-nav-auth'>
+                        {user ? (
+                            <div className='main-nav-auth-inner'>
+                                {/* <span className='main-nav-name'>{user.displayName}</span> */}
+                                <img src={user.photoURL} alt="user" className="main-nav-img" />
+                                <button className='btn btn-revers' onClick={() => auth.signOut()}>Sign out</button>
+                            </div>
+                        ) : (
+                            <button className='btn btn-revers' onClick={signInWithGoogle}>Signin</button>
+                        )}
+                    </div>
                 </li>
             </ul>
         </nav>
 
-        <button class="btn-mobile-nav">
-            <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
-            <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
+        <button className="btn-mobile-nav">
+            <ion-icon className="icon-mobile-nav" name="menu-outline"></ion-icon>
+            <ion-icon className="icon-mobile-nav" name="close-outline"></ion-icon>
         </button>
     </header>);
 }

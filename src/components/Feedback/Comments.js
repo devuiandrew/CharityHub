@@ -11,6 +11,7 @@ import {
 const Comments = ({ commentsUrl, currentUserId }) => {
   const [backendComments, setBackendComments] = useState([]);
   const [activeComment, setActiveComment] = useState(null);
+
   const rootComments = backendComments.filter(
     (backendComment) => backendComment.parentId === null
   );

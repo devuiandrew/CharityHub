@@ -60,6 +60,22 @@
   border-color: transparent;
 }
 
+.main-nav-auth-inner {
+  display: flex;
+  align-items: center;
+}
+
+.main-nav-name {
+  color: white;
+  font-weight: 500;
+  font-size: 1.8rem;
+}
+
+.main-nav-img {
+  border-radius: 50%;
+  max-width: 6rem;
+}
+
 /* MOBILE */
 .btn-mobile-nav {
   border: none;
