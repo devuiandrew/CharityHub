@@ -1,6 +1,6 @@
 export function Donation() {
     return (<section className="section-donation" id="donation">
-        <div classNameName="donation-part">
+        <div className="donation-part">
             <div className="donation-heading">
                 <h2 className="heading-secondary">Ways to Support Charity Hub</h2>
 

@@ -7,7 +7,7 @@ import MusicCollection from '../images/musical.jpg'
 
 export default function Collection() {
     return (
-        <section className="section-meals" id="meals">
+        <section className="section-collection" id="collection">
             <div className="container center-text">
                 <h2 className="heading-secondary">
                     Our Collerion

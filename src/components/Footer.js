@@ -1,7 +1,7 @@
 import logo_2 from '../images/logo-2.png'
 
 export function Footer() {
-    return (<footer className="footer">
+    return (<footer className="footer" id="ctu">
         <div className="container grid grid--footer">
             <div className="logo-col">
                 <a href="#" className="footer-logo">

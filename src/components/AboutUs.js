@@ -1,5 +1,5 @@
 export function AboutUs() {
-    return (<section class="section-vision" id="vision">
+    return (<section className="section-vision" id="vision">
         <div className='vision-box'>
             <h2 className='heading-primary '>About Charity Hub</h2>
             <div className='charity-vision'>

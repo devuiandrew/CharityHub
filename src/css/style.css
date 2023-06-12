@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: black;
+  background-color: #000000cc;
 
   /* Because we want header to be sticky later */
   height: 9.6rem;
@@ -16,6 +16,11 @@
 
 .logo {
   height: 5.2rem;
+}
+
+ion-icon.md.hydrated {
+  width: 4rem;
+  height: 4rem;
 }
 
 /**************************/
@@ -104,8 +109,9 @@
   height: 8rem;
   padding-top: 0;
   padding-bottom: 0;
-  background-color: rgba(255, 255, 255, 0.97);
+  background-color: #000000cc;
   z-index: 999;
+
   box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.03);
 }
 
@@ -149,7 +155,7 @@
   max-width: 60rem;
 }
 
-.delivered-meals {
+.delivered-collection {
   display: flex;
   align-items: center;
   gap: 1.6rem;
@@ -324,10 +330,10 @@
 }
 
 /**************************/
-/* MEALS SECTION */
+/* Collection SECTION */
 /**************************/
 
-.section-meals {
+.section-collection {
   padding: 9.6rem 0;
 }
 
