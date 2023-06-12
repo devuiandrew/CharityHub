@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { db } from "../Authentication/firebase";
 import firebase from "firebase/compat/app";
 import { collection, addDoc } from "firebase/firestore";
+import UserContext from "../hooks/useContext";
 
 function CommentForm() {
+  const user = useContext(UserContext);
+  let id, name;
+  if (user) {
+    id = user.uid;
+    name = user.displayName;
+  } else {
+    console.log("user not login");
+  }
   const [commentData, setCommentData] = useState({
     id: "",
     body: "",
@@ -22,7 +31,11 @@ function CommentForm() {
     if (commentData.body !== "") {
       await addDoc(collection(db, "comments"), {
         ...commentData,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        id: Math.random().toString(36),
+        parentId: null,
+        userId: id,
+        username: name,
+        createdAt: new Date().toISOString(),
       });
       setCommentData({
         id: "",
