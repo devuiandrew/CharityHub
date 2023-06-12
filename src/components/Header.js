@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { signInWithGoogle, auth } from "./Authentication/firebase";
+import UserContext from "./hooks/useContext";
 import logo_2 from '../images/logo-2.png'
 
 
@@ -10,8 +11,6 @@ export default function Header() {
     const headerEl = React.useRef(null);
 
     const [isToggled, setIsToggled] = useState(true);
-
-    const [user, setUser] = useState(null);
 
     const handleToggle = () => {
         setIsToggled(!isToggled);
@@ -31,14 +30,8 @@ export default function Header() {
         };
     }, []);
 
-
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((user) => {
-            setUser(user);
-        });
-        return () => unsubscribe();
-    }, []);
-
+    // use "user" from context
+    const user = useContext(UserContext);
 
 
     return (
@@ -62,7 +55,6 @@ export default function Header() {
                         <div className='main-nav-auth'>
                             {user ? (
                                 <div className='main-nav-auth-inner'>
-                                    {/* <span className='main-nav-name'>{user.displayName}</span> */}
                                     <img src={user.photoURL} alt="user" className="main-nav-img" />
                                     <button className='btn btn-revers' onClick={() => auth.signOut()}>Sign out</button>
                                 </div>
