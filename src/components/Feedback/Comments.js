@@ -1,90 +1,88 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import CommentForm from "./CommentForm";
 import Comment from "./Comment";
-import {
-  getComments as getCommentsApi
-} from "../../js/api";
-import firebase from 'firebase/compat/app';
-import "firebase/firestore";
-import UserContext from "../hooks/useContext";
+import { collection, deleteDoc, updateDoc, onSnapshot, doc, setDoc } from "firebase/firestore";
+import { db } from "../Authentication/firebase";
 
-const createCommentApi = async (text, parentId = null, id, name) => {
-
-  return {
-    id: Math.random().toString(36),
-    body: text,
-    parentId,
-    userId: id,
-    username: name,
-    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-  };
-};
-
-const updateCommentApi = async (text) => {
-  return { text };
-};
-
-const deleteCommentApi = async () => {
-  return {};
-};
 
 const Comments = ({ currentUser }) => {
 
+
+
   const id = currentUser.uid;
   const name = currentUser.displayName;
-  console.log(id)
-  const [backendComments, setBackendComments] = useState([]);
+
   const [activeComment, setActiveComment] = useState(null);
 
-
-  const rootComments = backendComments.filter(
-    (backendComment) => backendComment.parentId === null
-  );
+  const [comments, setComments] = useState([]);
 
   const getReplies = (commentId) =>
-    backendComments
-      .filter((backendComment) => backendComment.parentId === commentId)
+    comments
+      .filter((comments) => comments.parentId === commentId)
       .sort(
         (a, b) =>
           new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
       );
 
-  //! send comment with user info
-  const addComment = (text, parentId) => {
-    createCommentApi(text, parentId, id, name).then((comment) => {
-      setBackendComments([comment, ...backendComments]);
-      setActiveComment(null);
-    });
-  };
+  //* Send comment with user info to firebase db
+  const addComment = async (text, parentId = null) => {
+    try {
+      const newComment = {
+        id: Math.random().toString(36),
+        body: text,
+        parentId,
+        userId: id,
+        username: name,
+        createdAt: new Date().toISOString(),
+      };
 
-  const updateComment = (text, commentId) => {
-    updateCommentApi(text).then(() => {
-      const updatedBackendComments = backendComments.map((backendComment) => {
-        if (backendComment.id === commentId) {
-          return { ...backendComment, body: text };
-        }
-        return backendComment;
-      });
-      setBackendComments(updatedBackendComments);
-      setActiveComment(null);
-    });
+      await setDoc(doc(db, "comments", newComment.id), newComment);
+    } catch (error) {
+      console.error("Error adding comment:", error);
+    }
+    setActiveComment(null);
   };
-
-  const deleteComment = (commentId) => {
-    if (window.confirm("Are you sure you want to remove comment?")) {
-      deleteCommentApi().then(() => {
-        const updatedBackendComments = backendComments.filter(
-          (backendComment) => backendComment.id !== commentId
-        );
-        setBackendComments(updatedBackendComments);
+  //* update comment using custom id [commentId]
+  const updateComment = async (text, commentId) => {
+    try {
+      const updatedCommentRef = doc(db, "comments", commentId);
+      await updateDoc(updatedCommentRef, {
+        body: text,
       });
+      setActiveComment(null);
+    } catch (error) {
+      console.error("Error updating comment:", error);
     }
   };
 
+  //* delete comment using custom firebase doc id compering to commentId
+  const deleteComment = async (commentId) => {
+    if (window.confirm("Are you sure you want to remove comment?")) {
+      try {
+        const commentRef = doc(db, "comments", commentId);
+        console.log(commentRef.path);
+
+        await deleteDoc(commentRef);
+      } catch (error) {
+        console.error("Error deleting comment:", error);
+      }
+    }
+  };
+
+
   useEffect(() => {
-    getCommentsApi().then((data) => {
-      setBackendComments(data);
-    });
+    const fetchComments = async () => {
+      const commentCollection = collection(db, "comments");
+      const unsubscribe = onSnapshot(commentCollection, (snapshot) => {
+        const commentList = snapshot.docs.map((doc) => doc.data());
+
+        setComments(commentList);
+      });
+      return () => {
+        unsubscribe();
+      };
+    };
+    fetchComments();
   }, []);
 
   return (
@@ -96,19 +94,21 @@ const Comments = ({ currentUser }) => {
         <CommentForm submitLabel="Write" handleSubmit={addComment} />
         <div className="comments-container">
 
-          {rootComments.map((rootComment) => (
-            <Comment
-              key={rootComment.id}
-              comment={rootComment}
-              replies={getReplies(rootComment.id)}
-              activeComment={activeComment}
-              setActiveComment={setActiveComment}
-              addComment={addComment}
-              deleteComment={deleteComment}
-              updateComment={updateComment}
-              currentUserId={currentUser.uid}
-            />
-          ))}
+          {comments.filter(
+            (comment) => comment.parentId === null).map((rootComment) => (
+              <Comment
+                key={rootComment.id}
+                comment={rootComment}
+                replies={getReplies(rootComment.id)}
+                activeComment={activeComment}
+                setActiveComment={setActiveComment}
+                addComment={addComment}
+                deleteComment={deleteComment}
+                updateComment={updateComment}
+                currentUserId={currentUser.uid}
+              />
+
+            ))}
 
         </div>
       </div>

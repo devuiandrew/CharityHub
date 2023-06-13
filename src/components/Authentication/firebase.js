@@ -1,7 +1,8 @@
-import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-import { getFirestore } from "firebase/firestore"
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyCN6LOPEekcrbkRdq97cs7A8wttvmOY9iM",
@@ -9,15 +10,14 @@ const firebaseConfig = {
     projectId: "charity-hub-4236f",
     storageBucket: "charity-hub-4236f.appspot.com",
     messagingSenderId: "1058773547831",
-    appId: "1:1058773547831:web:00e91ed9248022eab478b2",
-    databaseURL: "gs://charity-hub-4236f.appspot.com/"
+    appId: "1:1058773547831:web:ab7bf1c657923227b478b2"
 };
-const app = firebase.initializeApp(firebaseConfig)
+const app = initializeApp(firebaseConfig)
 
-const auth = firebase.auth();
+const auth = getAuth(app);
 const db = getFirestore(app)
-const provider = new firebase.auth.GoogleAuthProvider();
-const signInWithGoogle = () => auth.signInWithPopup(provider);
+const provider = new GoogleAuthProvider();
+const signInWithGoogle = () => signInWithPopup(auth, provider);
 
 
 
