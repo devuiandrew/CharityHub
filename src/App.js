@@ -19,7 +19,6 @@ import Comments from './components/Feedback/Comments';
 import { Donation } from './components/Donation';
 import { Footer } from './components/Footer';
 import { AboutUs } from './components/AboutUs';
-import CommentForm from './components/Test/CommentForm';
 // import Comments from './components/Test/Comments';
 
 
@@ -52,8 +51,6 @@ function App() {
         }
         <Donation />
 
-        {/* <CommentForm /> */}
-        {/* <Comments /> */}
         {/* <ContactUs /> */}
       </main >
 
