@@ -1,47 +1,47 @@
 # Charity Hub
 
-A landing page for a fictional charitable foundation with an online museum. Visitors can read about the foundation, browse its collections and see the ways to support it. Users who sign in with Google can join the discussion in a comment section.
+Лендинг вымышленного благотворительного фонда с онлайн-музеем. Посетители могут узнать о фонде, посмотреть его коллекции и выбрать, как его поддержать. Пользователи, вошедшие через Google, могут участвовать в обсуждении в разделе комментариев.
 
-This is a pet project built to practice React, responsive layout and Firebase.
+Это пет-проект, сделанный для практики в React, адаптивной вёрстке и Firebase.
 
-## Features
+## Возможности
 
-- **Responsive layout**, with a mobile navigation menu and a header that sticks to the top on scroll.
-- **Google sign-in** through Firebase Authentication (optional).
-- **Live comments** stored in Cloud Firestore (optional). Signed-in users can post, reply, edit and delete their own comments, and updates appear in real time.
-- **Content sections**: About, The Power of Giving, Our Collection, Ways to Support and Contacts.
+- **Адаптивная вёрстка**: мобильное меню и шапка, которая закрепляется при прокрутке.
+- **Вход через Google** с помощью Firebase Authentication (необязательно).
+- **Комментарии в реальном времени** с хранением в Cloud Firestore (необязательно). Вошедшие пользователи могут писать комментарии, отвечать на них, а также редактировать и удалять свои.
+- **Разделы страницы**: «О фонде», «Сила добрых дел», «Наши коллекции», «Как помочь» и «Контакты».
 
-## Tech stack
+## Технологии
 
-- [React 18](https://react.dev/) (bootstrapped with [Create React App](https://create-react-app.dev/))
-- [Firebase 9](https://firebase.google.com/): Authentication and Cloud Firestore
-- [Ionicons](https://ionic.io/ionicons) for icons
-- Plain CSS, with media queries for responsiveness
+- [React 18](https://react.dev/) (проект создан через [Create React App](https://create-react-app.dev/))
+- [Firebase 9](https://firebase.google.com/): Authentication и Cloud Firestore
+- [Ionicons](https://ionic.io/ionicons) для иконок
+- Обычный CSS с медиазапросами для адаптивности
 
-## Getting started
+## Запуск
 
-### Prerequisites
+### Что понадобится
 
-- Node.js 16 or later, with npm
-- Optionally, a Firebase project (the free Spark plan is enough), if you want sign-in and comments
+- Node.js 16 или новее и npm
+- Проект Firebase, если нужны вход и комментарии (хватит бесплатного тарифа Spark)
 
-### 1. Clone and install
+### 1. Клонирование и установка
 
 ```bash
-git clone https://github.com/<your-username>/CharityHub.git
+git clone https://github.com/devuiandrew/CharityHub.git
 cd CharityHub
 npm install
 ```
 
-### 2. Configure Firebase (optional)
+### 2. Настройка Firebase (необязательно)
 
-Without Firebase the site works as a static landing page: the sign-in button and the comment section are hidden. To enable them:
+Без Firebase сайт работает как обычный статический лендинг: кнопка входа и раздел комментариев скрыты. Чтобы включить их:
 
-1. Create a project in the [Firebase Console](https://console.firebase.google.com/).
-2. Add a **Web app** and copy its config.
-3. Go to **Authentication → Sign-in method** and enable **Google**.
-4. Create a **Cloud Firestore** database. The app uses a single collection named `comments`.
-5. Copy `.env.example` to `.env` and fill in the values:
+1. Создайте проект в [консоли Firebase](https://console.firebase.google.com/).
+2. Добавьте **Web app** и скопируйте его конфигурацию.
+3. В разделе **Authentication → Sign-in method** включите вход через **Google**.
+4. Создайте базу **Cloud Firestore**. Приложение использует одну коллекцию — `comments`.
+5. Скопируйте `.env.example` в `.env` и заполните значения:
 
 ```bash
 cp .env.example .env
@@ -56,9 +56,9 @@ REACT_APP_FIREBASE_MESSAGING_SENDER_ID=...
 REACT_APP_FIREBASE_APP_ID=...
 ```
 
-#### Recommended Firestore security rules
+#### Рекомендуемые правила безопасности Firestore
 
-These rules let anyone read comments, let signed-in users create comments, and let users edit or delete only their own comments:
+С этими правилами читать комментарии может любой посетитель, создавать — только вошедшие пользователи, а редактировать и удалять — только автор комментария:
 
 ```
 rules_version = '2';
@@ -75,46 +75,46 @@ service cloud.firestore {
 }
 ```
 
-### 3. Run
+### 3. Запуск
 
 ```bash
 npm start
 ```
 
-The app opens at [http://localhost:3000](http://localhost:3000).
+Приложение откроется по адресу [http://localhost:3000](http://localhost:3000).
 
-## Available scripts
+## Команды
 
-| Command         | Description                                           |
-| --------------- | ----------------------------------------------------- |
-| `npm start`     | Runs the app in development mode with hot reload.     |
-| `npm test`      | Runs the tests in watch mode.                         |
-| `npm run build` | Builds an optimized production bundle into `build/`.  |
+| Команда         | Что делает                                                     |
+| --------------- | -------------------------------------------------------------- |
+| `npm start`     | Запускает приложение в режиме разработки с автоперезагрузкой.  |
+| `npm test`      | Запускает тесты в режиме отслеживания изменений.               |
+| `npm run build` | Собирает оптимизированную продакшен-версию в папку `build/`.   |
 
-## Project structure
+## Структура проекта
 
 ```
 src/
 ├── components/
-│   ├── Authentication/   # Firebase initialization (skipped when not configured)
-│   ├── Feedback/         # Comment section (list, single comment, form)
-│   ├── hooks/            # React context for the current user
-│   ├── Header.js         # Navigation and sign-in button
-│   ├── HomePage.js       # Hero section
-│   ├── AboutUs.js        # Mission, vision, values
-│   ├── Purpose.js        # "The Power of Giving"
-│   ├── Collection.js     # Museum collections
-│   ├── Donation.js       # Ways to support
+│   ├── Authentication/   # Инициализация Firebase (пропускается без конфигурации)
+│   ├── Feedback/         # Комментарии: список, отдельный комментарий, форма
+│   ├── hooks/            # React-контекст с текущим пользователем
+│   ├── Header.js         # Навигация и кнопка входа
+│   ├── HomePage.js       # Главный экран
+│   ├── AboutUs.js        # Миссия, видение, ценности
+│   ├── Purpose.js        # «Сила добрых дел»
+│   ├── Collection.js     # Коллекции музея
+│   ├── Donation.js       # Как помочь фонду
 │   └── Footer.js
-├── css/                  # Global styles and media queries
+├── css/                  # Общие стили и медиазапросы
 ├── images/
 └── App.js
 ```
 
-## Deployment
+## Деплой
 
-`npm run build` produces a static site that can be hosted anywhere, for example on Firebase Hosting, Netlify, Vercel or GitHub Pages. If you use Firebase, add your production domain under **Authentication → Settings → Authorized domains**, or Google sign-in will not work there.
+`npm run build` собирает статический сайт, который можно разместить где угодно: например, на Firebase Hosting, Netlify, Vercel или GitHub Pages. Если используете Firebase, добавьте домен сайта в **Authentication → Settings → Authorized domains**, иначе вход через Google там работать не будет.
 
-## Notes
+## Примечание
 
-All the content (the organization, address, phone number and collections) is placeholder text. Charity Hub is not a real foundation.
+Весь контент (название организации, адрес, телефон, коллекции) — заглушки. Charity Hub не является реальным фондом.
