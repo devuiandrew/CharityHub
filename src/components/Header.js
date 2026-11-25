@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { signInWithGoogle, auth } from "./Authentication/firebase";
+import { signInWithGoogle, auth, isFirebaseConfigured } from "./Authentication/firebase";
 import UserContext from "./hooks/useContext";
 import logo_2 from '../images/logo-2.png'
 
@@ -36,11 +36,8 @@ export default function Header() {
 
     return (
         <header ref={headerEl} className="header">
-            <a href="#" className='logo'>
-                {
-                    <img className="logo" alt="Omnifood logo" src={logo_2} />
-                }
-
+            <a href="#root" className='logo'>
+                <img className="logo" alt="Charity Hub logo" src={logo_2} />
             </a>
 
             <nav className="main-nav">
@@ -51,18 +48,20 @@ export default function Header() {
                         <a className="main-nav-link" href="#donation">Donation</a>
                     </li>
                     <li><a className="main-nav-link" href="#ctu">Contact Us</a></li>
-                    <li>
-                        <div className='main-nav-auth'>
-                            {user ? (
-                                <div className='main-nav-auth-inner'>
-                                    <img src={user.photoURL} alt="user" className="main-nav-img" />
-                                    <button className='btn btn-revers' onClick={() => auth.signOut()}>Sign out</button>
-                                </div>
-                            ) : (
-                                <button className='btn btn-revers' onClick={signInWithGoogle}>Signin</button>
+                    {isFirebaseConfigured && (
+                        <li>
+                            <div className='main-nav-auth'>
+                                {user ? (
+                                    <div className='main-nav-auth-inner'>
+                                        <img src={user.photoURL} alt="user" className="main-nav-img" />
+                                        <button className='btn btn-revers' onClick={() => auth.signOut()}>Sign out</button>
+                                    </div>
+                                ) : (
+                                    <button className='btn btn-revers' onClick={signInWithGoogle}>Signin</button>
                             )}
                         </div>
                     </li>
+                    )}
                 </ul>
             </nav>
 

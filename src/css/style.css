@@ -280,8 +280,7 @@ ion-icon.md.hydrated {
   width: 100%;
   height: 100%;
   position: relative;
-  background-image: url(https://images.alphacoders.com/112/thumb-1920-112121.jpg),
-    url(https://tse2.mm.bing.net/th?id=OIP.H_leDeraoX3iUWhEI_-RXgHaEo&pid=Api);
+  background-image: url(../images/thumb.jpg);
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -812,7 +811,7 @@ ion-icon.md.hydrated {
 }
 
 .grid--footer {
-  grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1.5fr 1fr;
 }
 
 .logo-col {

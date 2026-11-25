@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useEffect } from 'react';
 import HandsImg from '../images/MainPagePhoto.png'
 
 export default function HomePage() {
@@ -46,7 +46,7 @@ export default function HomePage() {
                 <p className="hero-description">
                     We are a charitable foundation with a web museum. Discover our collections and support our cause. Together, we can make a difference.
                 </p>
-                <a href="#cta" className="btn btn--full margin-right-sm">Start helping now</a>
+                <a href="#donation" className="btn btn--full margin-right-sm">Start helping now</a>
 
                 <a href="#how" className="btn btn--outline">Learn more &darr;</a>
 

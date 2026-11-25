@@ -1,6 +1,3 @@
-import thumb from '../images/thumb.jpg'
-
-
 export function Purpose() {
     return (<section className="section-pupose card-box-shadow" id="how">
 
@@ -69,8 +66,6 @@ export function Purpose() {
 
             </div>
             <div className="step-img-box">
-                {/* <img src={thumb} className="step-img" alt="iPhone app
-            preferences selection screen"/> */}
             </div>
         </div>
     </section>);

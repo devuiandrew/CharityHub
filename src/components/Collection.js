@@ -10,14 +10,14 @@ export default function Collection() {
         <section className="section-collection" id="collection">
             <div className="container center-text">
                 <h2 className="heading-secondary">
-                    Our Collerion
+                    Our Collection
                 </h2>
                 <span className="subheading">Explore our web museum and discover our unique collections</span>
             </div>
 
             <div className="container grid grid--3-cols margin-bottom-md">
                 <div className="item">
-                    <img src={ArtCollection} className="item-img" alt="Japanese Gyozas" />
+                    <img src={ArtCollection} className="item-img" alt="Art collection" />
                     <div className="item-content">
                         <p className="item-title">Art Collection</p>
                         <div className="item-attributes">
@@ -29,7 +29,7 @@ export default function Collection() {
                 </div>
 
                 <div className="item">
-                    <img src={HistoryCollection} className="item-img" alt="Japanese Gyozas" />
+                    <img src={HistoryCollection} className="item-img" alt="Historical artifacts" />
                     <div className="item-content">
                         <p className="item-title">Historical Treasures</p>
                         <div className="item-attributes">
@@ -41,7 +41,7 @@ export default function Collection() {
                 </div>
 
                 <div className="item">
-                    <img src={MusicCollection} className="item-img" alt="Japanese Gyozas" />
+                    <img src={MusicCollection} className="item-img" alt="Musical instruments" />
                     <div className="item-content">
                         <p className="item-title">Musical Collection</p>
                         <div className="item-attributes">
@@ -51,10 +51,6 @@ export default function Collection() {
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div className="container all-recipes">
-                <a href="#" className="link">See all collection &rarr;</a>
             </div>
         </section>);
 }

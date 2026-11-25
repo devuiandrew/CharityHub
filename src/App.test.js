@@ -1,8 +1,21 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+jest.mock('./components/Authentication/firebase', () => ({
+  isFirebaseConfigured: true,
+  auth: {
+    onAuthStateChanged: (callback) => {
+      callback(null);
+      return () => {};
+    },
+    signOut: jest.fn(),
+  },
+  db: {},
+  signInWithGoogle: jest.fn(),
+}));
+
+test('renders the landing page for a signed-out user', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: /welcome to charity hub/i })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /signin/i })).toBeInTheDocument();
 });
